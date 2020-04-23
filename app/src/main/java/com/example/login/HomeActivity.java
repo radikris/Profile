@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -90,7 +91,7 @@ public class HomeActivity extends AppCompatActivity {
                 if (mUploadTask != null && mUploadTask.isInProgress()) {
                     Toast.makeText(HomeActivity.this, "Upload in progress", Toast.LENGTH_SHORT).show();
                 } else {
-                    //uploadFile();
+                    uploadFile();
                 }
             }
         });
@@ -98,7 +99,7 @@ public class HomeActivity extends AppCompatActivity {
         mTextViewShowUploads.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                openImagesActivity();
             }
         });
     }
@@ -122,7 +123,7 @@ public class HomeActivity extends AppCompatActivity {
         }
     }
 
-    /*private String getFileExtension(Uri uri) {
+    private String getFileExtension(Uri uri) {
         ContentResolver cR = getContentResolver();
         MimeTypeMap mime = MimeTypeMap.getSingleton();
         return mime.getExtensionFromMimeType(cR.getType(uri));
@@ -146,8 +147,17 @@ public class HomeActivity extends AppCompatActivity {
                             }, 500);
 
                             Toast.makeText(HomeActivity.this, "Upload successful", Toast.LENGTH_LONG).show();
-                            Upload upload = new Upload(mEditTextFileName.getText().toString().trim(),
+                            /*Upload upload = new Upload(mEditTextFileName.getText().toString().trim(),
                                     taskSnapshot.getStorage().getDownloadUrl().toString());
+                            String uploadId = mDatabaseRef.push().getKey();
+                            mDatabaseRef.child(uploadId).setValue(upload);*/
+                            Task<Uri> urlTask = taskSnapshot.getStorage().getDownloadUrl();
+                            while (!urlTask.isSuccessful());
+                            Uri downloadUrl = urlTask.getResult();
+
+                            //Log.d(TAG, "onSuccess: firebase download url: " + downloadUrl.toString()); //use if testing...don't need this line.
+                            Upload upload = new Upload(mEditTextFileName.getText().toString().trim(),downloadUrl.toString());
+
                             String uploadId = mDatabaseRef.push().getKey();
                             mDatabaseRef.child(uploadId).setValue(upload);
                         }
@@ -168,7 +178,17 @@ public class HomeActivity extends AppCompatActivity {
         } else {
             Toast.makeText(this, "No file selected", Toast.LENGTH_SHORT).show();
         }
-    }*/
+    }
+
+    private void openImagesActivity() {
+        Intent intent = new Intent(this, ShowActivity.class);
+        startActivity(intent);
+    }
+
+    public void showprofile(View view){
+        Intent i=new Intent(this, ProfileActivity.class);
+        startActivity(i);
+    }
 
 
 }

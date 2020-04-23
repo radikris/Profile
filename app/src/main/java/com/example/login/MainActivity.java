@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -46,6 +47,10 @@ public class MainActivity extends AppCompatActivity {
                 else if(pwd.isEmpty()){
                     password.setError("Please enter your password!");
                     password.requestFocus();
+                }
+                else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                    emailId.setError("Please enter a valid email");
+                    emailId.requestFocus();
                 }
                 else if(email.isEmpty() && pwd.isEmpty()){
                     emailId.setError("Please enter email!");

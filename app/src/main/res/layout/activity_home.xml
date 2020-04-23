@@ -35,7 +35,8 @@
         android:layout_height="match_parent"
         android:layout_above="@id/progress_bar"
         android:layout_below="@id/edit_text_file_name"
-        android:layout_marginTop="16dp" />
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="0dp" />
 
     <ProgressBar
         android:id="@+id/progress_bar"
@@ -65,5 +66,13 @@
         android:gravity="center"
         android:text="Show Uploads"
         android:textSize="16sp" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="450dp"
+        android:onClick="showprofile"
+        android:text="Button" />
 
 </android.widget.RelativeLayout>
