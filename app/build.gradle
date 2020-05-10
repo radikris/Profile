@@ -38,8 +38,15 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth:19.3.0'
     implementation 'com.google.firebase:firebase-core:17.3.0'
     //implementation 'com.google.firebase:firebase-database:17.0.0'
-    implementation 'com.android.support:recyclerview-v7:28.0.0'
-    implementation 'com.android.support:cardview-v7:28.0.0'
+    //implementation 'com.android.support:recyclerview-v7:28.0.0'
+    //implementation 'com.android.support:cardview-v7:28.0.0'
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
+    implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'com.squareup.picasso:picasso:2.71828'
+    implementation 'com.r0adkll:slidableactivity:2.0.0'
+    implementation 'com.muddzdev:styleabletoast:2.2.3'
+    implementation 'com.google.android.material:material:1.1.0'
+    implementation 'com.theartofdev.edmodo:android-image-cropper:2.6.0'
+
 
 }

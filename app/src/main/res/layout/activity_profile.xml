@@ -4,15 +4,61 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background_material_light"
     tools:context=".ProfileActivity">
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
         android:text="TextView"
         android:textSize="24sp"
-        tools:layout_editor_absoluteX="171dp"
-        tools:layout_editor_absoluteY="350dp" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"/>
+
+    <EditText
+        android:id="@+id/editname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="150dp"
+        android:hint="Name" />
+
+    <EditText
+        android:id="@+id/editcity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="200dp"
+        android:hint="Name" />
+
+    <EditText
+        android:id="@+id/editjob"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="250dp"
+        android:hint="Name" />
+
+    <ImageView
+        android:id="@+id/showprofile"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_marginTop="350dp"
+        android:layout_centerHorizontal="true"
+        app:srcCompat="@drawable/gotoprofile" />
+
+    <Button
+        android:id="@+id/updatebutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Update"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="620dp"/>
 </android.widget.RelativeLayout>

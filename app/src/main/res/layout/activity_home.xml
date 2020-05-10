@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
+    android:background="@color/background_material_light"
     tools:context=".HomeActivity">
 
     <Button
@@ -14,7 +15,7 @@
         android:layout_alignParentBottom="true"
         android:layout_marginLeft="10dp"
         android:text="Log out!" />
-
+    
     <Button
         android:id="@+id/button_choose_image"
         android:layout_width="wrap_content"
@@ -32,10 +33,10 @@
     <ImageView
         android:id="@+id/image_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="300dp"
         android:layout_above="@id/progress_bar"
         android:layout_below="@id/edit_text_file_name"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="100dp"
         android:layout_marginBottom="0dp" />
 
     <ProgressBar
@@ -44,6 +45,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/button_upload"
+        tools:layout_marginBottom="70dp"
         android:layout_alignParentStart="true"
         android:layout_marginBottom="16dp" />
 
@@ -69,10 +71,12 @@
 
     <Button
         android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="450dp"
+        android:layout_width="27dp"
+        android:layout_height="27dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="599dp"
+        android:background="@drawable/gotoprofile"
         android:onClick="showprofile"
-        android:text="Button" />
+        android:visibility="visible" />
 
 </android.widget.RelativeLayout>

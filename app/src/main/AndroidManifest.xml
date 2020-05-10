@@ -9,17 +9,27 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ProfileActivity"></activity>
-        <activity android:name=".ShowActivity" />
-        <activity android:name=".HomeActivity" />
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ProfileActivity"
+            android:theme="@style/AppTheme.SlidrActivityTheme"></activity>
+        <activity
+            android:name=".ShowActivity"
+            android:theme="@style/AppTheme.SlidrActivityTheme" />
+        <activity android:name=".HomeActivity" />
+        <activity android:name=".LoginActivity">
+        </activity>
+        <activity android:name=".MainActivity" />
+        <activity
+            android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
+            android:theme="@style/AppTheme" />
+        <activity android:name=".GalleryActivity" />
     </application>
 
 </manifest>

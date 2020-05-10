@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background_material_light"
     tools:context=".ShowActivity">
 
     <ProgressBar
@@ -14,8 +15,51 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
+        android:layout_marginTop="50dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         />
+
+    <Button
+        android:id="@+id/delete_button"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginLeft="340dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/delete"
+        android:onClick="DeleteButton" />
+
+    <EditText
+        android:id="@+id/searchfilter"
+        android:layout_width="0dp"
+        android:layout_height="0dp"/>
+        /*android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="Search for something..." />*/
+
+    <Spinner
+        android:id="@+id/spinner1"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center"/>
+
+    <Spinner
+        android:id="@+id/spinner2"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_toRightOf="@id/spinner1"
+        android:layout_marginLeft="5dp"
+        android:gravity="center"/>
+
+    <Spinner
+        android:id="@+id/spinner3"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_toRightOf="@id/spinner2"
+        android:layout_marginLeft="5dp"
+        android:gravity="center"/>
 
 </android.widget.RelativeLayout>
