@@ -29,9 +29,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/image_description"
-        android:layout_marginTop="12dp"
-        android:layout_marginRight="330dp"
         android:layout_marginLeft="12dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginRight="330dp"
         android:clickable="true"
         android:src="@drawable/c_send"
         android:tint="@android:color/white"
@@ -41,7 +41,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="50dp"
+        android:layout_marginRight="35dp"
         android:layout_marginTop="5dp"
+        android:layout_marginBottom="10dp"
         android:layout_below="@id/image_description"
         android:focusable="true"
         android:focusableInTouchMode="true"
@@ -53,26 +55,24 @@
             android:layout_marginRight="20dp"
             android:layout_height="wrap_content"
             android:clickable="true"
-            android:hint="Message"
+            android:hint="Leave a comment"
             android:imeOptions="actionSend"
-            android:inputType="text"
+            android:inputType="textMultiLine"
             android:textIsSelectable="true" />
 
+        <ListView
+            android:id="@+id/list_of_messages"
+            android:layout_width="358dp"
+            android:layout_height="264dp"
+            android:layout_below="@id/input"
+            android:layout_alignTop="@id/fab"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="7dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginBottom="10dp"
+            android:divider="@android:color/transparent"
+            android:dividerHeight="17dp" />
+
     </com.google.android.material.textfield.TextInputLayout>
-
-    <ListView
-        android:id="@+id/list_of_messages"
-        android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:divider="@android:color/transparent"
-        android:dividerHeight="17dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginBottom="6dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_alignTop="@id/fab"
-        android:layout_below="@id/image_description"
-        />
-
 
 </RelativeLayout>

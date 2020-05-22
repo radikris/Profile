@@ -53,11 +53,13 @@ public class GalleryActivity extends AppCompatActivity {
         description=findViewById(R.id.image_description);
         fab=findViewById(R.id.fab);
         thisprofile=note.getEmail();
+
+        final EditText input=findViewById(R.id.input);
+        input.setOnEditorActionListener(editorListener);
+
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EditText input=findViewById(R.id.input);
-                input.setOnEditorActionListener(editorListener);
                 FirebaseDatabase.getInstance().getReference().push().setValue(new ChatMessage(input.getText().toString(), FirebaseAuth.getInstance().getCurrentUser().getEmail(), thisprofile));
                 input.setText("");
             }
@@ -73,7 +75,7 @@ public class GalleryActivity extends AppCompatActivity {
                 .into(imageView);
         description.setText("Name: " + note.getName() + "\n" + "City: " + note.getCity() + "\n" + "Job: " +note.getJob());
 
-        Snackbar.make(activity_galery, "Welcome" + FirebaseAuth.getInstance().getCurrentUser().getEmail(), Snackbar.LENGTH_SHORT).show();
+        Snackbar.make(activity_galery, "Welcome " + FirebaseAuth.getInstance().getCurrentUser().getEmail(), Snackbar.LENGTH_SHORT).show();
 
         displayChatMessage(thisprofile);
     }
@@ -93,7 +95,7 @@ public class GalleryActivity extends AppCompatActivity {
                     {
                         messageText.setText(model.getMessageText());
                         messageUser.setText(model.getMessageUser());
-                        messageTime.setText(DateFormat.format("yyyy:MM:dd (HH:mm)", model.getMessageTime()));
+                        messageTime.setText(DateFormat.format("yyyy:MM:dd", model.getMessageTime()));
                     }
             }
         };
