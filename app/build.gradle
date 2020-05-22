@@ -47,6 +47,7 @@ dependencies {
     implementation 'com.muddzdev:styleabletoast:2.2.3'
     implementation 'com.google.android.material:material:1.1.0'
     implementation 'com.theartofdev.edmodo:android-image-cropper:2.6.0'
+    implementation 'com.firebaseui:firebase-ui-database:1.0.1'
 
 
 }
