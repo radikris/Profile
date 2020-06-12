@@ -29,6 +29,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.RatingBar;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -62,8 +63,10 @@ public class ShowActivity extends AppCompatActivity implements ProfileAdapter.On
     private ProgressBar mProgressCircle;
 
     private DatabaseReference mDatabaseRef;
+    private DatabaseReference mDatabaseRef_ratings;
     private List<Upload> mUploads;
     public ArrayList<Upload> filteredList;
+    public ArrayList<Ratingsclass> ratingslist;
 
     private ValueEventListener mDBListener;
 
@@ -82,6 +85,7 @@ public class ShowActivity extends AppCompatActivity implements ProfileAdapter.On
     public String mixed_spinner;
 
     public boolean isfiltered;
+    public float sumofstars, numofratings, defaultstars;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,9 +96,13 @@ public class ShowActivity extends AppCompatActivity implements ProfileAdapter.On
         mRecyclerView = findViewById(R.id.recycler_view);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        Log.d("myTag", "oncreate eddig oke");
+
+
 
         mUploads = new ArrayList<>();
         mDatabaseRef = FirebaseDatabase.getInstance().getReference("uploads");
+        mDatabaseRef_ratings = FirebaseDatabase.getInstance().getReference("ratings");
 
         mProgressCircle=findViewById(R.id.progress_cirle);
         mStorage = FirebaseStorage.getInstance();
@@ -229,12 +237,14 @@ public class ShowActivity extends AppCompatActivity implements ProfileAdapter.On
             }
         });
 
+        Log.d("myTag", "eloszor az uploads");
+
         mDBListener= mDatabaseRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 mAuth = FirebaseAuth.getInstance();
                 final FirebaseUser user = mAuth.getCurrentUser();
-                String users_email=user.getEmail();
+                String users_email = user.getEmail();
 
                 mUploads.clear();
 
@@ -250,14 +260,19 @@ public class ShowActivity extends AppCompatActivity implements ProfileAdapter.On
                 }
                 //Toast.makeText(ShowActivity.this, mUploads.get(0).getName()+" " + mUploads.get(0).getCity(), Toast.LENGTH_SHORT).show();
                 Handler handler = new Handler();
-                                handler.postDelayed(new Runnable() {
-                                    public void run() {
-                                        // yourMethod();
-                                    }
-                                }, 1000);   //5 seconds*/
+                handler.postDelayed(new Runnable() {
+                    public void run() {
+                        // yourMethod();
+                    }
+                }, 1000);   //5 seconds*/
+                /*ratingbar???
 
-                mAdapter = new ProfileAdapter(ShowActivity.this, mUploads, ShowActivity.this); //nekem sima this nem jo
+                 */
+                //Log.d("myTag", "most jon a ratings");
 
+                Log.d("myTag", "most jon az adapter");
+                mAdapter = new ProfileAdapter(ShowActivity.this, mUploads, ShowActivity.this);//, ratingslist); //nekem sima this nem jo
+                mAdapter.notifyDataSetChanged();
                 mRecyclerView.setAdapter(mAdapter);
                 mProgressCircle.setVisibility(View.INVISIBLE);
 
@@ -272,6 +287,9 @@ public class ShowActivity extends AppCompatActivity implements ProfileAdapter.On
                 mProgressCircle.setVisibility(View.INVISIBLE);
             }
         });
+
+        function();
+
 
         thefilter.addTextChangedListener(new TextWatcher() {
             @Override
@@ -289,6 +307,10 @@ public class ShowActivity extends AppCompatActivity implements ProfileAdapter.On
                 filter(s.toString());
             }
         });
+
+        /*itt van meg hely onreatben*/
+
+
     }
 
     void name_spinner_setup(List<String>name_spinner){
@@ -318,6 +340,65 @@ public class ShowActivity extends AppCompatActivity implements ProfileAdapter.On
         }
     }
 
+    void function(){
+        Log.d("myTag", "function called");
+        for (int i = 0; i < mUploads.size(); i++){
+            mDatabaseRef_ratings = FirebaseDatabase.getInstance().getReference("ratings");
+            Log.d("myTag", "loop");
+            //checking if child already exists
+            mDatabaseRef_ratings=mDatabaseRef_ratings.child(mUploads.get(i).getKey());
+            Log.d("myTag", "ez az id: "+ mUploads.get(i).getKey());
+
+            final int finalI = i;
+            mDatabaseRef_ratings.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.getValue() == null) {
+                        // The child doesn't exist
+                        Log.d("myTag", "has no rating");
+                    }else{
+                        mDatabaseRef_ratings = FirebaseDatabase.getInstance().getReference("ratings").child(mUploads.get(finalI).getKey());
+                        Log.d("myTag", "checking the elements of this child");
+                        mDatabaseRef_ratings.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                Ratingsclass temp = new Ratingsclass();
+                                numofratings = 0;
+                                sumofstars = 0;
+                                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                                    temp = postSnapshot.getValue(Ratingsclass.class);
+                                    //temp.setRatingid(postSnapshot.getKey());
+                                    numofratings += 1;
+                                    sumofstars += temp.getNum_of_stars();
+                                    Log.d("myTag", numofratings + " es " + sumofstars);
+                                }
+                                if (numofratings == 0)
+                                    defaultstars = 0;
+                                else
+                                    defaultstars = sumofstars / numofratings;
+                                temp.setRatingid(mUploads.get(finalI).getKey());
+                                temp.setRating_sum(defaultstars);
+                                ratingslist.add(temp);
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                            }
+                        });
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    //
+                }
+            });
+
+        }
+
+    }
+
     private void filter(String text) {
         /*ArrayList<Upload> */filteredList = new ArrayList<>();
 
@@ -326,9 +407,9 @@ public class ShowActivity extends AppCompatActivity implements ProfileAdapter.On
         myList.remove("City");
         myList.remove("Job");
 
-        text.replace("Name", "");
-        text.replace("City", "");
-        text.replace("Job", "");
+        text.replace("Name", "-");
+        text.replace("City", "-");
+        text.replace("Job", "-");
 
         if(!(text.contains("Name") && text.contains("City") && text.contains("Job"))){
             Toast.makeText(ShowActivity.this, text, Toast.LENGTH_LONG).show();

@@ -14,23 +14,33 @@
         android:scaleType="centerCrop"
         android:id="@+id/image_note"
         android:src="@mipmap/ic_launcher"/>
-
-    <TextView
+    
+    <RatingBar
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:stepSize="1"
+        android:progressTint="#3685ef"
+        android:layout_centerHorizontal="true"
+        android:layout_alignBottom="@+id/image_note"
+        android:id="@+id/rb_ratingBar"/>
+
+    <TextView
         android:id="@+id/image_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_below="@id/image_note"
+        android:layout_marginTop="-5dp"
         android:text="Canada"
-        android:textSize="16dp"
-        android:textColor="#000"/>
+        android:textColor="#000"
+        android:textSize="16dp" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/image_description"
-        android:layout_marginLeft="12dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="15dp"
         android:layout_marginRight="330dp"
         android:clickable="true"
         android:src="@drawable/c_send"
@@ -41,8 +51,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="50dp"
-        android:layout_marginRight="35dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginTop="1dp"
         android:layout_marginBottom="10dp"
         android:layout_below="@id/image_description"
         android:focusable="true"
@@ -52,27 +62,36 @@
         <EditText
             android:id="@+id/input"
             android:layout_width="match_parent"
-            android:layout_marginRight="20dp"
-            android:layout_height="wrap_content"
+            android:layout_marginRight="0dp"
+            android:layout_height="42dp"
             android:clickable="true"
             android:hint="Leave a comment"
             android:imeOptions="actionSend"
-            android:inputType="textMultiLine"
+            android:inputType="text"
             android:textIsSelectable="true" />
 
         <ListView
             android:id="@+id/list_of_messages"
-            android:layout_width="358dp"
-            android:layout_height="264dp"
+            android:layout_width="328dp"
+            android:layout_height="305dp"
             android:layout_below="@id/input"
             android:layout_alignTop="@id/fab"
             android:layout_marginLeft="0dp"
             android:layout_marginTop="7dp"
-            android:layout_marginRight="25dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginRight="0dp"
+            android:layout_marginBottom="20dp"
             android:divider="@android:color/transparent"
             android:dividerHeight="17dp" />
 
     </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/ratingsummary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ratingsumm"
+        android:layout_below="@id/image_note"
+        android:layout_marginRight="15dp"
+        android:layout_alignParentRight="true"/>
 
 </RelativeLayout>

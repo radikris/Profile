@@ -9,6 +9,18 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+        <RatingBar
+            android:id="@+id/my_ratingBar"
+            style="?android:attr/ratingBarStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginLeft="75dp"
+            android:nextFocusLeft="@id/text_view_name"
+            android:progressTint="#3685ef"
+            android:stepSize="1" />
+
+
         <TextView
             android:id="@+id/text_view_name"
             android:layout_width="wrap_content"
