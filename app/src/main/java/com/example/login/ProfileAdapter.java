@@ -116,6 +116,7 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ImageVie
                                         if(key.equals(mUploads.get(position).getKey())){
                                             //holder.ratingBar.setRating(ratings_map.get(key));
                                             holder.ratingBar.setRating(ratings_map.get(key));
+                                            mUploads.get(position).setRating((int) Math.ceil(ratings_map.get(key)));
                                             Log.d("myTag", "ratingben->"+ ratings_map.get(key));
                                         }
                                     }

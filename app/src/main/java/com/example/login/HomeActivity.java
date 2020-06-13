@@ -1,8 +1,12 @@
 package com.example.login;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.ContentResolver;
 import android.content.DialogInterface;
@@ -11,6 +15,7 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.MenuItem;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
@@ -23,6 +28,7 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -45,7 +51,7 @@ import com.example.login.ShowActivity;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     Button logout;
     FirebaseAuth mFirebaseAuth;
 
@@ -77,6 +83,8 @@ public class HomeActivity extends AppCompatActivity {
     int itsokey=0;
     boolean continue_possible;
 
+    public DrawerLayout dlayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,6 +99,20 @@ public class HomeActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
+
+        dlayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        NavigationView navigationView=findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+
+        Toolbar toolbar=findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, dlayout, toolbar,
+                R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        dlayout.addDrawerListener(toggle);
+        toggle.syncState();
+
+
 
         mButtonChooseImage = findViewById(R.id.button_choose_image);
         mButtonUpload = findViewById(R.id.button_upload);
@@ -471,5 +493,34 @@ public class HomeActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onBackPressed() {
+        if (dlayout.isDrawerOpen(GravityCompat.START)) {
+            dlayout.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
+    }
 
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        Intent i;
+        switch (item.getItemId()){
+            case R.id.nav_myprofile:
+                i = new Intent(HomeActivity.this, ProfileActivity.class);
+                startActivity(i);
+                break;
+
+            case R.id.nav_search:
+                i = new Intent(HomeActivity.this, ShowActivity.class);
+                startActivity(i);
+                    break;
+        }
+        dlayout.closeDrawer(GravityCompat.START);
+        return true;
+    }
 }
+
+/*manifest
+android:theme="@style/AppTheme.SlidrActivityTheme" - profileacitivyben
+ */

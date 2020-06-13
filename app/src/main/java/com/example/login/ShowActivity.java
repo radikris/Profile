@@ -92,6 +92,9 @@ public class ShowActivity extends AppCompatActivity implements ProfileAdapter.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show);
 
+        getSupportActionBar().setTitle("Home");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         Slidr.attach(this);
         mRecyclerView = findViewById(R.id.recycler_view);
         mRecyclerView.setHasFixedSize(true);
@@ -288,7 +291,7 @@ public class ShowActivity extends AppCompatActivity implements ProfileAdapter.On
             }
         });
 
-        function();
+        //function();
 
 
         thefilter.addTextChangedListener(new TextWatcher() {

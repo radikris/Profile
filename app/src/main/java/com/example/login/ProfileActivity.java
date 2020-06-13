@@ -40,6 +40,9 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
+        getSupportActionBar().setTitle("Home");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         Slidr.attach(this);
         textView=findViewById(R.id.textView);
         mAuth = FirebaseAuth.getInstance();

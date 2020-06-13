@@ -12,6 +12,7 @@ public class Upload implements Parcelable {
     private String mKey;
     private String city;
     private String job;
+    private int rating;
 
     public Upload() {
         //empty constructor needed
@@ -96,6 +97,13 @@ public class Upload implements Parcelable {
         job=mJob;
     }
 
+    public int getRating() {
+        return rating;
+    }
+
+    public void setRating(int rating) {
+        this.rating = rating;
+    }
 
     @Override
     public int describeContents() {
