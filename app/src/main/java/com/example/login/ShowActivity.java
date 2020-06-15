@@ -83,7 +83,7 @@ public class ShowActivity extends AppCompatActivity implements ProfileAdapter.On
     public String city_item_spinner;
     public String job_item_spinner;
     public String mixed_spinner;
-
+    public String star_emoji;
     public boolean isfiltered;
     public float sumofstars, numofratings, defaultstars;
 
@@ -101,7 +101,8 @@ public class ShowActivity extends AppCompatActivity implements ProfileAdapter.On
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         Log.d("myTag", "oncreate eddig oke");
 
-
+        int unicode=0x2B50;
+        star_emoji=getEmoji(unicode);
 
         mUploads = new ArrayList<>();
         mDatabaseRef = FirebaseDatabase.getInstance().getReference("uploads");
@@ -119,7 +120,7 @@ public class ShowActivity extends AppCompatActivity implements ProfileAdapter.On
         final List<String> name_spinner=new ArrayList<>();
         final List<String> city_spinner=new ArrayList<>();
         final List<String> job_spinner=new ArrayList<>();
-        name_spinner.add(0, "Name");
+        name_spinner.add(0, "Rating");
         city_spinner.add(0, "City");
         job_spinner.add(0, "Job");
         final List<String>all_spinner=new ArrayList<>();
@@ -132,7 +133,7 @@ public class ShowActivity extends AppCompatActivity implements ProfileAdapter.On
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if(parent.getItemAtPosition(position).equals("Name")){
+                if(parent.getItemAtPosition(position).equals("Rating")){
                     //thefilter.getText().clear();
                     for(int i=0; i<name_spinner.size(); i++){
                         if(all_spinner.contains(name_spinner.get(i))){
@@ -140,7 +141,7 @@ public class ShowActivity extends AppCompatActivity implements ProfileAdapter.On
                             //mixed_spinner.replace(name_spinner.get(i), "Name");
                         }
                     }
-                    all_spinner.add("Name");
+                    all_spinner.add("Rating");
                     mixed_spinner = String.join(",", all_spinner);
                     if(isfiltered)
                         thefilter.setText(mixed_spinner);
@@ -317,11 +318,14 @@ public class ShowActivity extends AppCompatActivity implements ProfileAdapter.On
     }
 
     void name_spinner_setup(List<String>name_spinner){
-        for(Upload item: mUploads){
+        /*for(Upload item: mUploads){
             if(name_spinner.contains(item.getName()))
                 continue;
             else
                 name_spinner.add(item.getName());
+        }*/
+        for(int i=5; i>0; i--){
+            name_spinner.add(i+star_emoji);
         }
     }
 
@@ -406,20 +410,20 @@ public class ShowActivity extends AppCompatActivity implements ProfileAdapter.On
         /*ArrayList<Upload> */filteredList = new ArrayList<>();
 
         List<String> myList = new ArrayList<String>(Arrays.asList(text.split(",")));
-        myList.remove("Name");
+        myList.remove("Rating");
         myList.remove("City");
         myList.remove("Job");
 
-        text.replace("Name", "-");
+        text.replace("Rating", "-");
         text.replace("City", "-");
         text.replace("Job", "-");
 
-        if(!(text.contains("Name") && text.contains("City") && text.contains("Job"))){
+        if(!(text.contains("Rating") && text.contains("City") && text.contains("Job"))){
             Toast.makeText(ShowActivity.this, text, Toast.LENGTH_LONG).show();
             for (Upload item : mUploads) {
                 int match_counter = 0;
                 for (int i = 0; i < myList.size(); i++) {
-                    if (item.getName().toLowerCase().contains(myList.get(i).toLowerCase())) {
+                    if (String.valueOf(item.getRating()).equals(myList.get(i).substring(0, 1))) {
                         match_counter += 1;
                     }
                     if (item.getCity().toLowerCase().contains(myList.get(i).toLowerCase())) {
@@ -571,5 +575,10 @@ public class ShowActivity extends AppCompatActivity implements ProfileAdapter.On
         mUploads.get(position);
         Intent intent=new Intent(this, ShowProfile.class);
     }*/
+    public String getEmoji(int uni)
+    {
+        return new String(Character.toChars(uni));
+    }
+
 
 }

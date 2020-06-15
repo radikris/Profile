@@ -149,6 +149,7 @@ public class MainActivity extends AppCompatActivity {
                                                 //Log.d(TAG, "onSuccess: firebase download url: " + downloadUrl.toString()); //use if testing...don't need this line.
 
                                                 User user = new User(mname, mcity, mjob, email, downloadUrl.toString());
+                                                user.setUid(FirebaseAuth.getInstance().getCurrentUser().getUid());
 
                                                 /*String uploadId = mDatabaseRef.push().getKey();
                                                 mDatabaseRef.child(uploadId).setValue(user);*/

@@ -9,6 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".ChatActivity"
+            android:parentActivityName=".GalleryActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -18,21 +21,23 @@
         </activity>
         <activity
             android:name=".ProfileActivity"
-            android:parentActivityName=".HomeActivity"></activity>
+            android:parentActivityName=".HomeActivity" />
         <activity
             android:name=".ShowActivity"
-            android:theme="@style/AppTheme.SlidrActivityTheme"
-            android:parentActivityName=".HomeActivity"/>
-        <activity android:name=".HomeActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name=".LoginActivity">
-        </activity>
+            android:parentActivityName=".HomeActivity"
+            android:theme="@style/AppTheme.SlidrActivityTheme" />
+        <activity
+            android:name=".HomeActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".LoginActivity"></activity>
         <activity android:name=".MainActivity" />
         <activity
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
             android:theme="@style/AppTheme" />
-        <activity android:name=".GalleryActivity"
-            android:parentActivityName=".ShowActivity"/>
+        <activity
+            android:name=".GalleryActivity"
+            android:parentActivityName=".ShowActivity" />
+
     </application>
 
 </manifest>

@@ -13,6 +13,7 @@ public class Upload implements Parcelable {
     private String city;
     private String job;
     private int rating;
+    public String uid;
 
     public Upload() {
         //empty constructor needed
@@ -118,5 +119,13 @@ public class Upload implements Parcelable {
         dest.writeString(mKey);
         dest.writeString(city);
         dest.writeString(job);
+    }
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
     }
 }

@@ -14,6 +14,8 @@
         android:scaleType="centerCrop"
         android:id="@+id/image_note"
         android:src="@mipmap/ic_launcher"/>
+
+
     
     <RatingBar
         android:layout_width="wrap_content"
@@ -93,5 +95,15 @@
         android:layout_below="@id/image_note"
         android:layout_marginRight="15dp"
         android:layout_alignParentRight="true"/>
+
+    <ImageButton
+        android:id="@+id/chatButton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_toRightOf="@+id/rb_ratingBar"
+        android:layout_alignBottom="@+id/image_note"
+        android:layout_marginLeft="15dp"
+        android:background="@drawable/ic_chat"
+        android:layout_marginBottom="8dp"/>
 
 </RelativeLayout>

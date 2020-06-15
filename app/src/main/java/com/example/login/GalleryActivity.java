@@ -1,6 +1,7 @@
 package com.example.login;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RatingBar;
@@ -59,9 +61,12 @@ public class GalleryActivity extends AppCompatActivity {
     RatingBar ratingbar;
     DatabaseReference mDatabaseRef;
     DatabaseReference mDatabaseRef_ratings;
+    DatabaseReference mData_to_userid;
     FirebaseAuth mAuth;
     public String ratingchildid, ratingman;
     public float sumofstars, numofratings, defaultstars;
+    ImageButton chatbutton;
+    public String message_to_who;
 
 
     @Override
@@ -83,9 +88,11 @@ public class GalleryActivity extends AppCompatActivity {
         fab = findViewById(R.id.fab);
         ratingsummary=findViewById(R.id.ratingsummary);
         thisprofile = note.getEmail();
+        chatbutton=findViewById(R.id.chatButton);
         mAuth=FirebaseAuth.getInstance();
         mDatabaseRef = FirebaseDatabase.getInstance().getReference("comments");
         mDatabaseRef_ratings = FirebaseDatabase.getInstance().getReference("ratings");
+        mData_to_userid=FirebaseDatabase.getInstance().getReference("uploads");
 
         ratingbar=(RatingBar)findViewById(R.id.rb_ratingBar);
         ratingstars=0;
@@ -212,6 +219,35 @@ public class GalleryActivity extends AppCompatActivity {
         Snackbar.make(activity_galery, "Welcome " + FirebaseAuth.getInstance().getCurrentUser().getEmail(), Snackbar.LENGTH_SHORT).show();
 
         displayChatMessage(note.getKey());
+
+        final Upload finalNote1 = note;
+        chatbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mData_to_userid.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                            Upload temp = postSnapshot.getValue(Upload.class);
+                            if(postSnapshot.getKey().equals(finalNote1.getKey())){
+                                message_to_who=temp.getUid();
+                                Intent profileintent=new Intent(GalleryActivity.this, ChatActivity.class);
+                                profileintent.putExtra("user_id", message_to_who);
+                                profileintent.putExtra("user_name", temp.getName());
+                                profileintent.putExtra("user_job", temp.getJob());
+                                startActivity(profileintent);
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+            }
+        });
+
     }
 
     private void displayChatMessage(final String whichprofile) {

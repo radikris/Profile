@@ -3,6 +3,7 @@ package com.example.login;
 public class User {
     public String name, city, job, email;
     public String mImageUrl;
+    public String uid;
 
     public User(){}
 
@@ -49,4 +50,12 @@ public class User {
     public String getImageUrl(){return mImageUrl;}
 
     public void setImageUrl(String imageurl){mImageUrl=imageurl;}
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
 }

@@ -249,9 +249,12 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                     upload.setCity(nupload.getCity());
                     upload.setJob(nupload.getJob());
                     upload.setImageUrl(nupload.getImageUrl());
+                    if(nupload.getUid()!=null){
+                        upload.setUid(nupload.getUid());
+                    }
                     mUploads.add(upload);
                 }
-                Toast.makeText(HomeActivity.this, "korte" + mUploads.size(), Toast.LENGTH_SHORT).show();
+
                 //itsokey=1;
                 if(itsokey==0){
                     int position=-1;
@@ -377,6 +380,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                                 //if(selectedItem!=null) {
                                     upload.setCity(selectedItem.getCity());
                                     upload.setJob(selectedItem.getJob());
+                                    upload.setUid(selectedItem.getUid());
                                 //}
                                 //HA A SHOWACTIVITYBEN TORLOM AKKOR ITT MAR NEM TUDOM MEGMENTENI
 
