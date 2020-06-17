@@ -12,5 +12,9 @@
             android:id="@+id/nav_search"
             android:icon="@drawable/ic_allprofiles"
             android:title="Search profiles" />
+        <item
+            android:id="@+id/nav_chat"
+            android:icon="@drawable/ic_chat"
+            android:title="Chats" />
     </group>
 </menu>

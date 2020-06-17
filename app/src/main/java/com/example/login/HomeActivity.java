@@ -210,7 +210,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 mImageUri = result.getUri();
                 Picasso.get()
                         .load(mImageUri)
-                        .resize(500, 400)
+                        .fit()
+                        .centerCrop()
                         .into(mImageView);
             }else if(resultCode==CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE){
                 Exception e=result.getError();
@@ -519,6 +520,11 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 i = new Intent(HomeActivity.this, ShowActivity.class);
                 startActivity(i);
                     break;
+
+            case R.id.nav_chat:
+                i = new Intent(HomeActivity.this, ConversationActivity.class);
+                startActivity(i);
+                break;
         }
         dlayout.closeDrawer(GravityCompat.START);
         return true;

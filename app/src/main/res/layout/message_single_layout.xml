@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/message_single_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+    <!--Your comment-->
+    <!--Your comment
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/chat_single_image"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="10dp"
+        android:src="@drawable/gotoprofile" />
+    -->
+
+    <TextView
+        android:id="@+id/chat_single_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:background="@drawable/message_text_background"
+        android:padding="10dp"
+        android:layout_below="@id/chat_single_time"
+        android:text="message"
+        android:textColor="#FFFFFF"
+        />
+
+    <TextView
+        android:id="@+id/chat_single_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_alignParentTop="true"
+        android:text="00:00" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/chat_single_message"
+        android:id="@+id/chat_single_image"
+        android:layout_marginLeft="10dp"
+        android:scaleType="centerCrop"/>
+
+
+</RelativeLayout>

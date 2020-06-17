@@ -59,7 +59,7 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ImageVie
                 .load(uploadCurrent.getImageUrl())
                 .fit()
                 .placeholder(R.drawable.loading)
-                //.centerCrop()
+                .centerCrop()
                 //.resize(500, 400)
                 .into(holder.imageView);
 
@@ -113,7 +113,7 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ImageVie
                                     }*/
 
                                     for(String key : ratings_map.keySet()){
-                                        if(key.equals(mUploads.get(position).getKey())){
+                                        if(position < mUploads.size() && key.equals(mUploads.get(position).getKey())){
                                             //holder.ratingBar.setRating(ratings_map.get(key));
                                             holder.ratingBar.setRating(ratings_map.get(key));
                                             mUploads.get(position).setRating((int) Math.ceil(ratings_map.get(key)));
