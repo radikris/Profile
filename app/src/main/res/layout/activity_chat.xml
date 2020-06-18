@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ChatActivity"
+    android:background="#cccccc">
+    
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_below="@id/chat_bar"
+        android:layout_marginBottom="62dp"
+        android:id="@+id/refresh_layout">
+    
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/chat_bar"
+            android:layout_marginBottom="62dp"
+            android:id="@+id/chat_lists">
+        </androidx.recyclerview.widget.RecyclerView>
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/chat_bar"
+        android:background="@color/colorAccent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/chat_display_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="display_name"
+            android:textColor="@android:color/white"
+            android:textSize="20sp" />
+        <TextView
+            android:id="@+id/chat_job_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Job"
+            android:textColor="@android:color/white"
+            android:textSize="13sp"
+            android:layout_below="@id/chat_display_name"
+            android:layout_marginStart="1dp"/>
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/chat_toolbar_image"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:src="@drawable/gotoprofile"
+            android:layout_marginEnd="15dp"
+            android:layout_centerInParent="true"
+            android:layout_alignParentEnd="true"/>
+    </RelativeLayout>
+    </androidx.appcompat.widget.Toolbar>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:weightSum="10"
+        android:background="#fff"
+        android:layout_alignParentBottom="true"
+        android:layout_height="60dp">
+        <Button
+            android:id="@+id/chat_add_button"
+            android:layout_width="55dp"
+            android:layout_height="50dp"
+            android:layout_gravity="end"
+            android:background="@drawable/add"
+            />
+        <EditText
+            android:id="@+id/chat_user_message"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:hint="Enter Message ..."
+            android:layout_toEndOf="@id/chat_add_button"
+            android:layout_toStartOf="@id/chat_send_button"
+            android:inputType="textMultiLine"
+            android:lines="8"
+            android:minLines="2"
+            android:gravity="top|left"
+            android:maxLines="10"
+            android:scrollbars="vertical"/>
+        <Button
+            android:id="@+id/chat_send_button"
+            android:layout_width="55dp"
+            android:layout_height="50dp"
+            android:background="@drawable/send"
+            android:padding="10sp"
+            android:layout_marginRight="20dp"
+            />
+    </LinearLayout>
+
+</RelativeLayout>
