@@ -66,7 +66,6 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ImageVie
         holder.ratingBar.setRating(0) ;
         ratings_map=new HashMap<>();
         mratings_array=new ArrayList<Ratingsclass>();
-        Log.d("myTag", "benne vok adapter class");
         mDatabaseRef_ratings = FirebaseDatabase.getInstance().getReference();
         mDatabaseRef_ratings.child("ratings").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
